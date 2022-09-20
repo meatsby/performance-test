@@ -1,0 +1,28 @@
+plugins {
+    id 'groovy'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.apache.groovy:groovy:4.0.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation group: 'org.ngrinder', name: 'ngrinder-groovy', version: '3.5.5-p1'
+    implementation group: 'net.sf.grinder', name: 'grinder-dcr-agent', version: '3.9.1'
+    implementation group: 'com.launchdarkly', name: 'okhttp-eventsource', version: '2.7.1'
+}
+
+configurations {
+    groovy
+}
+
+test {
+    useJUnitPlatform()
+}
