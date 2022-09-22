@@ -32,7 +32,7 @@ class FlipTest {
 //        JsonSlurper slurper = new JsonSlurper()
 //        String json = slurper.parseText(response.getBody())
 //        JSONObject accessToken = json.token
-        headers.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjYzNjc1MDM0LCJleHAiOjE2NjM2ODU4MzQsImF1dGhvcml0eSI6IkdVRVNUIn0.oC8NwzTNd4ljNTzmMs44TPgNcji3yEd2fDRhTo6KzCk")
+        headers.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjYzODMyMjg4LCJleHAiOjE2NjM4NDMwODgsImF1dGhvcml0eSI6IkdVRVNUIn0.-flW-OverJT8-2o6Mx_XtZ6Nlwn_JtHiM0yx8m3dKjM")
         request.setHeaders(headers)
         test.record(request);
         grinder.logger.info("before process.");
