@@ -11,6 +11,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.ngrinder.http.HTTPRequest
 
+import java.util.concurrent.ThreadLocalRandom
+
 import static net.grinder.script.Grinder.grinder
 
 @RunWith(GrinderRunner)
@@ -27,12 +29,7 @@ class FlipTest {
     static void beforeClass() {
         test = new GTest(1, "test1");
         request = new HTTPRequest()
-//        HTTPResponse response = request.POST("https://www.gongcheck.shop/enter/aWonJbS5IHeNeuUVJ2yqOw/pwd", "{\n    \"password\" : \"0000\"\n}".getBytes())
-//        println(response)
-//        JsonSlurper slurper = new JsonSlurper()
-//        String json = slurper.parseText(response.getBody())
-//        JSONObject accessToken = json.token
-        headers.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjYzODMyMjg4LCJleHAiOjE2NjM4NDMwODgsImF1dGhvcml0eSI6IkdVRVNUIn0.-flW-OverJT8-2o6Mx_XtZ6Nlwn_JtHiM0yx8m3dKjM")
+        headers.put("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjYzOTAwMzUxLCJleHAiOjE2NjM5MTExNTEsImF1dGhvcml0eSI6IkdVRVNUIn0.VN9lZa2twe1rNR3wPsKYPrGw8BlyAL-qf-JaxqAkV90")
         request.setHeaders(headers)
         test.record(request);
         grinder.logger.info("before process.");
@@ -44,7 +41,7 @@ class FlipTest {
         grinder.statistics.delayReports = true
         grinder.logger.info("before thread.")
         eventHandler = new SimpleEventHandler()
-        eventSource = new EventSource.Builder(eventHandler, URI.create("https://dev.gongcheck.shop/api/jobs/164/runningTasks/connect"))
+        eventSource = new EventSource.Builder(eventHandler, URI.create("https://dev.gongcheck.shop/api/jobs/155/runningTasks/connect"))
                 .headers(Headers.of(headers))
                 .build()
         eventSource.start()
@@ -53,13 +50,12 @@ class FlipTest {
     // This method is continuously executed until you stop the test
     @Test
     void test() {
-        request.POST("https://dev.gongcheck.shop/api/tasks/1422/flip")
-        request.POST("https://dev.gongcheck.shop/api/tasks/1423/flip")
+        def nextInt = ThreadLocalRandom.current().nextInt(1434, 1470)
+        request.POST("https://dev.gongcheck.shop/api/tasks/" + nextInt + "/flip")
     }
 
     @AfterThread
     void afterThread() {
-        // request.POST("https://dev.gongcheck.shop/api/jobs/164/complete", Map.of("author", "Submission"))
         eventSource.close()
 
         for (String respRecord : eventHandler.respList) {
