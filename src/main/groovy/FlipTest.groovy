@@ -52,6 +52,7 @@ class FlipTest {
     void test() {
         def nextInt = ThreadLocalRandom.current().nextInt(1434, 1470)
         request.POST("https://dev.gongcheck.shop/api/tasks/" + nextInt + "/flip")
+        Thread.sleep(10000)
     }
 
     @AfterThread
